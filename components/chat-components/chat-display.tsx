@@ -78,7 +78,7 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
                                             )}
                                             <Avatar>
                                                 <AvatarFallback>
-                                                    {item.role === 'user' ? inbox.email.split(" ").map((chunk) => chunk[0]).join("") : 'A'}
+                                                    {item.role === 'user' ? inbox.email.split(" ").map((chunk) => chunk[0]).join("").toUpperCase() : 'A'}
                                                 </AvatarFallback>
                                             </Avatar>
                                             {item.role === 'assistant' && (
