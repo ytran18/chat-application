@@ -32,6 +32,10 @@ export default function page() {
     };
 
     React.useEffect(() => {
+        console.log("Call API here!");
+    },[]);
+
+    React.useEffect(() => {
         if (width > 1024) setShowProfile(true);
         if (width <= 1024) setShowProfile(false);
     }, [width]);
@@ -68,9 +72,9 @@ export default function page() {
                     <TabsContent value='all' className='m-0'>
                         <ChatList items={inbox} handleSelectChat={handleSelectChat}/>
                     </TabsContent>
-                    <TabsContent value="unread" className="m-0">
-                        <ChatList items={inbox.filter((item) => !item.read)} handleSelectChat={handleSelectChat} />
-                    </TabsContent>
+                    {/* <TabsContent value="unread" className="m-0"> */}
+                        {/* <ChatList items={inbox.filter((item) => !item.read)} handleSelectChat={handleSelectChat} /> */}
+                    {/* </TabsContent> */}
                 </Tabs>
             </ResizablePanel>
             <ResizableHandle withHandle className='hidden md:flex'/>

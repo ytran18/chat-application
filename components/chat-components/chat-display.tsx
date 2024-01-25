@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { MoreVertical, Mail as MailIcon, Phone, ArrowLeft } from "lucide-react";
+import { MoreVertical, Mail as MailIcon, MonitorSmartphone, MapPinned, GitBranch, MapPin, ArrowLeft, MapIcon, Compass, Chrome, Link, SwatchBook } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
@@ -29,7 +29,20 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
         };
     }, [inbox]);
 
-    const condition = width > 1024 ? (isShowProfile ? 'w-[65%] border-r border-rgb(226,232,241)' : 'w-full') : (isShowProfile ? 'hidden' : 'w-full')
+    const condition = width > 1024 ? (isShowProfile ? 'w-[65%] border-r border-rgb(226,232,241)' : 'w-full') : (isShowProfile ? 'hidden' : 'w-full');
+
+    const info = [
+        { label: 'IP', value: inbox?.ip, icon: MapPin },
+        { label: 'Country', value: inbox?.country, icon: MapIcon },
+        { label: 'City', value: inbox?.city, icon: MapPinned },
+        { label: 'Device type', value: inbox?.device_type, icon: MonitorSmartphone },
+        { label: 'OS', value: inbox?.os, icon: Compass },
+        { label: 'OS version', value: inbox?.os_version, icon: GitBranch },
+        { label: 'Browser', value: inbox?.browser, icon: Chrome },
+        { label: 'Browser version', value: inbox?.browser_version, icon: GitBranch },
+        { label: 'Device model', value: inbox?.device_model, icon: MonitorSmartphone },
+        { label: 'Device vendor', value: inbox?.device_vendor, icon: SwatchBook },
+    ];
 
     return (
         <div className="flex h-full flex-col">
@@ -46,7 +59,7 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
                                 </TooltipTrigger>
                                 <TooltipContent>Back</TooltipContent>
                             </Tooltip>
-                            <div>{inbox?.name}</div>
+                            <div>{inbox?.email}</div>
                         </div>
                         <Button onClick={() => handleShowProfile('prev')} variant="ghost" size="icon" disabled={!inbox}>
                             <MoreVertical className="h-4 w-4" />
@@ -59,20 +72,17 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
                             <div id="message-container" className="flex flex-col sticky bottom-0 gap-2 items-start p-4 overflow-y-auto" style={{height: 'calc(100vh - 210px)'}}>
                                 {inbox.message?.map((item, index) => {
                                     return (
-                                        <div key={`mail-mess-${index}`} className={`flex w-full items-center gap-2 text-sm ${item.senderId === 1 ? 'justify-end' : 'justify-start'}`}>
-                                            {item.senderId === 1 && (
-                                                <div className="p-2 bg-[rgb(43,97,255)] text-white rounded-xl max-w-60">{item.message}</div>
+                                        <div key={`mail-mess-${index}`} className={`flex w-full items-center gap-2 text-sm ${item.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                                            {item.role === 'user' && (
+                                                <div className="p-2 bg-[rgb(43,97,255)] text-white rounded-xl max-w-60">{item.content?.[0].text.value}</div>
                                             )}
                                             <Avatar>
                                                 <AvatarFallback>
-                                                    {item.name
-                                                        .split(" ")
-                                                        .map((chunk) => chunk[0])
-                                                        .join("")}
+                                                    {item.role === 'user' ? inbox.email.split(" ").map((chunk) => chunk[0]).join("") : 'A'}
                                                 </AvatarFallback>
                                             </Avatar>
-                                            {item.senderId === 2 && (
-                                                <div className="p-2 bg-[rgb(63,64,65)] text-white rounded-xl max-w-60">{item.message}</div>
+                                            {item.role === 'assistant' && (
+                                                <div className="p-2 bg-[rgb(63,64,65)] text-white rounded-xl max-w-60">{item.content?.[0].text.value}</div>
                                             )}
                                         </div>
                                     )
@@ -84,7 +94,6 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
                                     <div className="grid gap-4">
                                         <Textarea
                                             className="p-4"
-                                            placeholder={`Reply ${inbox.name}...`}
                                         />
                                         <div className="flex items-center">
                                             <Label
@@ -123,40 +132,33 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
                                     <h1 className="text-xl font-bold h-[52px] flex items-center px-4">Profile</h1>
                                 </div>
                                 <div className="flex flex-col items-center gap-2 p-2 border-b border-[rgb(226,232,241)]">
-                                    {!inbox.avt && (
+                                    {!inbox.url && (
                                         <Avatar className="w-[180px] h-[180px] text-2xl">
                                             <AvatarFallback>
-                                                {inbox.name.split(" ").map((chunk) => chunk[0]).join("")}
+                                                {inbox.email.split(" ").map((chunk) => chunk[0]).join("")}
                                             </AvatarFallback>
                                         </Avatar>
                                     )}
-                                    {inbox.avt && (
+                                    {inbox.url && (
                                         <Avatar className="w-[180px] h-[180px] text-2xl">
-                                            <AvatarImage src={inbox.avt}/>
+                                            <AvatarImage src={inbox.url}/>
                                         </Avatar>
                                     )}
-                                    <div className="text-xl font-bold tracking-wider">{inbox.name}</div>
+                                    <div className="text-xl truncate w-full text-center font-bold tracking-wider">{inbox.email}</div>
                                 </div>
-                                <div className="p-6 w-full">
-                                    <div className="text-sm font-semibold mb-5">Contact information</div>
-                                    {inbox.email && (
-                                        <div className="flex w-full items-center text-xs gap-3 mb-3">
-                                            <MailIcon className="w-[18px]"/>
-                                            <div className="flex flex-col">
-                                                <div className="font-medium">Email Address</div>
-                                                <div className="text-blue-400 truncate w-full">{inbox.email}</div>
+                                <div className="p-6 w-full overflow-y-auto" style={{height: 'calc(100vh - 305px)'}}>
+                                    <div className="text-sm font-semibold mb-5">User information</div>
+                                    {info.map((item, index) => {
+                                        return (
+                                            <div key={`info-${index}`} className="flex w-full items-center text-xs gap-3 mb-3">
+                                                <item.icon className="w-[18px]"/>
+                                                <div className="flex flex-col">
+                                                    <div className="font-medium">{item.label}</div>
+                                                    <div className="text-blue-400 truncate w-full">{item.value}</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
-                                    {inbox.phone && (
-                                        <div className="flex items-center text-xs gap-3">
-                                            <Phone className="w-[18px]"/>
-                                            <div className="flex flex-col">
-                                                <div className="font-medium">Email Address</div>
-                                                <div className="text-blue-400">{inbox.phone}</div>
-                                            </div>
-                                        </div>
-                                    )}
+                                        )
+                                    })}
                                 </div>
                             </div>
                         )}
