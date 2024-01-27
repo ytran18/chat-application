@@ -360,17 +360,10 @@ export const gapTime = (unixTime: number) => {
 };
 
 export const randomBgColor = () => {
-  const bgColor = [
-  "red-300", "red-400", "red-500", "red-600", "red-700", "red-800", "red-900",
-  "yellow-300", "yellow-400", "yellow-500", "yellow-600", "yellow-700", "yellow-800", "yellow-900",
-  "green-300", "green-400", "green-500", "green-600", "green-700", "green-800", "green-900",
-  "blue-300", "blue-400", "blue-500", "blue-600", "blue-700", "blue-800", "blue-900",
-  "indigo-300", "indigo-400", "indigo-500", "indigo-600", "indigo-700", "indigo-800", "indigo-900",
-  "purple-300", "purple-400", "purple-500", "purple-600", "purple-700", "purple-800", "purple-900",
-  "pink-300", "pink-400", "pink-500", "pink-600", "pink-700", "pink-800", "pink-900"
+  const color = ['rgb(229,231,235)','rgb(209,213,219)','rgb(156,163,175)','rgb(107,114,128)','rgb(75,85,99)','rgb(55,65,81)','rgb(31,41,55)','rgb(17,24,39)','rgb(11,16,26)','rgb(254,226,226)','rgb(254,202,202)','rgb(252,165,165)','rgb(248,113,113)','rgb(239,68,68)','rgb(220,38,38)','rgb(185,28,28)','rgb(153,27,27)','rgb(127,29,29)','rgb(255,251,235)','rgb(254,243,199)','rgb(253,230,138)','rgb(252,211,77)','rgb(251,191,36)','rgb(245,158,11)','rgb(217,119,6)','rgb(180,83,9)','rgb(146,64,14)','rgb(209,250,229)','rgb(167,243,208)','rgb(110,231,183)','rgb(52,211,153)','rgb(16,185,129)','rgb(5,150,105)','rgb(4,120,87)','rgb(6,95,70)','rgb(6,78,59)','rgb(207,231,254)','rgb(156,214,247)','rgb(109,194,243)','rgb(61,156,236)','rgb(32,115,223)','rgb(24,83,180)','rgb(13,60,128)','rgb(5,40,88)','rgb(4,32,63)','rgb(224,231,255)','rgb(159,180,251)','rgb(120,134,242)','rgb(81,100,224)','rgb(49,46,129)','rgb(34,48,100)','rgb(21,32,74)','rgb(12,22,47)','rgb(6,19,40)','rgb(237,233,254)','rgb(209,196,233)','rgb(180,155,227)','rgb(150,115,211)','rgb(119,78,202)','rgb(96,55,190)','rgb(79,44,150)','rgb(62,33,119)','rgb(49,27,99)','rgb(251,231,242)','rgb(244,178,209)','rgb(236,141,172)','rgb(219,90,107)','rgb(190,54,76)','rgb(147,41,61)','rgb(107,33,48)','rgb(74,24,35)','rgb(56,18,27)'
   ];
 
-  const randomIndex = Math.floor(Math.random() * bgColor.length);
+  const randomIndex = Math.floor(Math.random() * color.length);
 
-  return bgColor[randomIndex];
+  return color[randomIndex];
 };

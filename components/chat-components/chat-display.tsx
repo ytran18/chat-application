@@ -16,10 +16,11 @@ interface ChatDisplayProps {
     width: number,
     isShowProfile: boolean,
     handleSelectChat: () => void,
-    handleShowProfile: (type: string) => void
+    handleShowProfile: (type: string) => void,
+    avtBgColor: {id: string, bgColor: string}[],
 }
 
-export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, handleShowProfile }: ChatDisplayProps) {
+export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, handleShowProfile, avtBgColor }: ChatDisplayProps) {
 
     useEffect(() => {
         const container = document.getElementById('message-container');
@@ -43,6 +44,10 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
         { label: 'Device model', value: inbox?.device_model, icon: MonitorSmartphone },
         { label: 'Device vendor', value: inbox?.device_vendor, icon: SwatchBook },
     ];
+
+    const userAvatarColorBg = avtBgColor.find(item => item.id === inbox?.id)?.bgColor;
+    console.log(userAvatarColorBg);
+    
 
     return (
         <div className="flex h-full flex-col">
@@ -80,7 +85,7 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
                                                 </>
                                             )}
                                             <Avatar>
-                                                <AvatarFallback>
+                                                <AvatarFallback className="text-white" style={{backgroundColor: item.role === 'user' ? userAvatarColorBg : ''}}>
                                                     {item.role === 'user' ? inbox.email.split(" ").map((chunk) => chunk[0]).join("").toUpperCase() : 'A'}
                                                 </AvatarFallback>
                                             </Avatar>
@@ -138,18 +143,11 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
                                     <h1 className="text-xl font-bold h-[52px] flex items-center px-4">Profile</h1>
                                 </div>
                                 <div className="flex flex-col items-center gap-2 p-2 border-b border-[rgb(226,232,241)]">
-                                    {!inbox.url && (
-                                        <Avatar className="w-[180px] h-[180px] text-2xl">
-                                            <AvatarFallback>
-                                                {inbox.email.split(" ").map((chunk) => chunk[0]).join("")}
-                                            </AvatarFallback>
-                                        </Avatar>
-                                    )}
-                                    {inbox.url && (
-                                        <Avatar className="w-[180px] h-[180px] text-2xl">
-                                            <AvatarImage src={inbox.url}/>
-                                        </Avatar>
-                                    )}
+                                    <Avatar className="w-[180px] h-[180px] text-2xl">
+                                        <AvatarFallback className="text-white text-3xl" style={{backgroundColor: userAvatarColorBg}}>
+                                            {inbox.email.split(" ").map((chunk) => chunk[0]).join("").toUpperCase()}
+                                        </AvatarFallback>
+                                    </Avatar>
                                     <div className="text-xl truncate w-full text-center font-bold tracking-wider">{inbox.email}</div>
                                 </div>
                                 <div className="p-6 w-full overflow-y-auto" style={{height: 'calc(100vh - 305px)'}}>

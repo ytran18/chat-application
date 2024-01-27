@@ -100,6 +100,7 @@ export default function page() {
                     inbox={inbox.find((item) => item.id === mail.selected) || null}
                     width={width}
                     isShowProfile={isShowProfile}
+                    avtBgColor={avtBgColor}
                     handleSelectChat={handleSelectChat}
                     handleShowProfile={handleShowProfile}
                 />
