@@ -358,3 +358,19 @@ export const gapTime = (unixTime: number) => {
       return `${seconds} seconds ago`;
   }
 };
+
+export const randomBgColor = () => {
+  const bgColor = [
+  "red-300", "red-400", "red-500", "red-600", "red-700", "red-800", "red-900",
+  "yellow-300", "yellow-400", "yellow-500", "yellow-600", "yellow-700", "yellow-800", "yellow-900",
+  "green-300", "green-400", "green-500", "green-600", "green-700", "green-800", "green-900",
+  "blue-300", "blue-400", "blue-500", "blue-600", "blue-700", "blue-800", "blue-900",
+  "indigo-300", "indigo-400", "indigo-500", "indigo-600", "indigo-700", "indigo-800", "indigo-900",
+  "purple-300", "purple-400", "purple-500", "purple-600", "purple-700", "purple-800", "purple-900",
+  "pink-300", "pink-400", "pink-500", "pink-600", "pink-700", "pink-800", "pink-900"
+  ];
+
+  const randomIndex = Math.floor(Math.random() * bgColor.length);
+
+  return bgColor[randomIndex];
+};

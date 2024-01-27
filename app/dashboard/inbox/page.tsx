@@ -12,16 +12,22 @@ import { useMail } from '@/lib/use-mail';
 
 import DefaultLayout from '@/components/chat-components/default-layout';
 
-import { inbox } from '@/lib/data';
+import { inbox, randomBgColor } from '@/lib/data';
 import useWindowWidth from '@/lib/get-width';
 
 import { Search } from 'lucide-react';
+
+interface AvatarBackgroundColor {
+  id: string;
+  bgColor: string;
+}
 
 export default function page() {
 
     const width = useWindowWidth();
 
     const [isSelectChat, setIsSelectChat] = React.useState(false);
+    const [avtBgColor, setAvtBgColor] = React.useState<AvatarBackgroundColor[]>([]);
     const [isShowProfile, setShowProfile] = React.useState(width > 1024 ? true : false);
     const [mail] = useMail();
 
@@ -40,6 +46,14 @@ export default function page() {
         if (width <= 1024) setShowProfile(false);
     }, [width]);
 
+    React.useEffect(() => {
+        const colorArr: AvatarBackgroundColor[] = inbox.map((item) => {
+            return { id: item.id, bgColor: randomBgColor() };
+        });
+      
+          setAvtBgColor(colorArr);
+    },[]);
+
     const handleShowProfile = (type: string) => {
         if (type === 'prev') {
             setShowProfile(prev => !prev);
@@ -51,7 +65,7 @@ export default function page() {
 
     return (
         <DefaultLayout>
-            <ResizablePanel className={`h-full ${isSelectChat ? 'hidden' : 'block'} md:block min-w-[340px]`} defaultSize={270} maxSize={50} minSize={30}>
+            <ResizablePanel className={`h-full ${isSelectChat ? 'hidden' : 'block'} md:block min-w-[400px]`} defaultSize={270} maxSize={50} minSize={30}>
                 <Tabs defaultValue='all'>
                     <div className="flex items-center px-4 py-2">
                         <h1 className="text-xl font-bold">Inbox</h1>
@@ -70,7 +84,7 @@ export default function page() {
                         </form>
                     </div>
                     <TabsContent value='all' className='m-0'>
-                        <ChatList items={inbox} handleSelectChat={handleSelectChat}/>
+                        <ChatList avtBgColor={avtBgColor} items={inbox} handleSelectChat={handleSelectChat}/>
                     </TabsContent>
                     {/* <TabsContent value="unread" className="m-0"> */}
                         {/* <ChatList items={inbox.filter((item) => !item.read)} handleSelectChat={handleSelectChat} /> */}
