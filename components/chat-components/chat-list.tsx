@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback } from "../ui/avatar";
 interface ChatListProps {
     items: Inbox[],
     handleSelectChat: () => void,
-    avtBgColor: [{id: string, bgColor: string}],
+    avtBgColor: {id: string, bgColor: string}[],
 }
 
 export function ChatList({ items, handleSelectChat, avtBgColor }: ChatListProps) {
@@ -24,7 +24,7 @@ export function ChatList({ items, handleSelectChat, avtBgColor }: ChatListProps)
         handleSelectChat();
     }
 
-    console.log(avtBgColor);
+    // console.log(avtBgColor);
 
     return (
         <ScrollArea style={{height: 'calc(100vh - 120px)'}}>

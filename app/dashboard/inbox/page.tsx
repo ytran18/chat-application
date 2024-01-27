@@ -17,9 +17,9 @@ import useWindowWidth from '@/lib/get-width';
 
 import { Search } from 'lucide-react';
 
-interface AvatarBackgroundColor {
-  id: string;
-  bgColor: string;
+type AvatarBackgroundColor = {
+    id: string;
+    bgColor: string;
 }
 
 export default function page() {
@@ -47,11 +47,14 @@ export default function page() {
     }, [width]);
 
     React.useEffect(() => {
-        const colorArr: AvatarBackgroundColor[] = inbox.map((item) => {
-            return { id: item.id, bgColor: randomBgColor() };
+        const colorArr: { id: string; bgColor: string }[] = inbox.map(item => {
+            return {
+                id: item.id,
+                bgColor: randomBgColor()
+            }
         });
-      
-          setAvtBgColor(colorArr);
+
+        setAvtBgColor(colorArr);
     },[]);
 
     const handleShowProfile = (type: string) => {
