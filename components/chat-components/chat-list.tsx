@@ -46,16 +46,18 @@ export function ChatList({ items, handleSelectChat, avtBgColor }: ChatListProps)
                                 </AvatarFallback>
                             </Avatar>
                             <div className="flex flex-col w-full">
-                                <div className="flex w-full items-center justify-between">
-                                    <div className="flex items-center gap-2 mr-2">
-                                        <div className="font-semibold">{item.email}</div>
+                                <div className="flex w-full flex-1 items-center justify-between">
+                                    <div className="flex items-center gap-2 mr-2 w-full sm:w-auto">
+                                        <div className="font-semibold w-full sm:w-auto">{item.email}</div>
                                     </div>
-                                    <div className="text-xs w-[84px] opacity-60 truncate">{gapTime(item.message?.[item.message.length - 1].created_at)}</div>
+                                    <div className="text-xs hidden sm:flex w-[84px] opacity-60 truncate">{gapTime(item.message?.[item.message.length - 1].created_at)}</div>
                                 </div>
 
-                                <div className="line-clamp-2 text-xs text-muted-foreground">
+                                <div className="line-clamp-2 w-[60%] sm:w-full mb-3 text-xs text-muted-foreground">
                                     {item.user_last_message.substring(0, 300)}
                                 </div>
+
+                                <div className="text-xs flex sm:hidden w-[84px] opacity-60 truncate">{gapTime(item.message?.[item.message.length - 1].created_at)}</div>
                             </div>
                         </button>
                     )
