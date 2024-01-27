@@ -9,7 +9,7 @@ import { Separator } from "../ui/separator";
 import { Switch } from "../ui/switch";
 import { Textarea } from "../ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Inbox } from "@/lib/data";
+import { Inbox, convertTime } from "@/lib/data";
 
 interface ChatDisplayProps {
     inbox: Inbox | null,
@@ -74,7 +74,10 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
                                     return (
                                         <div key={`mail-mess-${index}`} className={`flex w-full items-center gap-2 text-sm ${item.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                                             {item.role === 'user' && (
-                                                <div className="p-2 bg-[rgb(43,97,255)] text-white rounded-xl max-w-60">{item.content?.[0].text.value}</div>
+                                                <>
+                                                    <div className="text-xs">{convertTime(item.created_at)}</div>
+                                                    <div className="p-2 bg-[rgb(43,97,255)] text-white rounded-xl max-w-52 md:max-w-60">{item.content?.[0].text.value}</div>
+                                                </>
                                             )}
                                             <Avatar>
                                                 <AvatarFallback>
@@ -82,7 +85,10 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
                                                 </AvatarFallback>
                                             </Avatar>
                                             {item.role === 'assistant' && (
-                                                <div className="p-2 bg-[rgb(63,64,65)] text-white rounded-xl max-w-60">{item.content?.[0].text.value}</div>
+                                                <>
+                                                    <div className="p-2 bg-[rgb(63,64,65)] text-white rounded-xl max-w-52 md:max-w-60">{item.content?.[0].text.value}</div>
+                                                    <div className="text-xs">{convertTime(item.created_at)}</div>
+                                                </>
                                             )}
                                         </div>
                                     )

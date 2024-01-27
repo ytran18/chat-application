@@ -275,7 +275,7 @@ export const inbox = [
       device_model: "Dell XPS 13",
       device_vendor: "Dell",
     },
-  ]
+]
   
   export type Inbox = (typeof inbox)[number]
   
@@ -319,3 +319,42 @@ export const inbox = [
   ]
   
 export type Account = (typeof accounts)[number]
+
+export const convertTime = (unixTime: number) => {
+    const date = new Date(unixTime * 1000);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+    const period = hours < 12 ? 'AM' : 'PM';
+
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+    return `${formattedHours}:${formattedMinutes} ${period}`;
+};
+
+export const gapTime = (unixTime: number) => {
+  const currentTime = Math.floor(Date.now() / 1000);
+  const timeDifference = currentTime - unixTime;
+
+  const seconds = timeDifference;
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const months = Math.floor(days / 30.44);
+  const years = Math.floor(days / 365.25);
+
+  if (years > 1) {
+    return `${years} years ago`;
+  } else if (months > 1) {
+      return `${months} months ago`;
+  } else if (days > 1) {
+      return `${days} days ago`;
+  } else if (hours > 1) {
+      return `${hours} hours ago`;
+  } else if (minutes > 1) {
+      return `${minutes} min ago`;
+  } else {
+      return `${seconds} seconds ago`;
+  }
+};

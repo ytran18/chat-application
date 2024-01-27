@@ -51,7 +51,7 @@ export default function page() {
 
     return (
         <DefaultLayout>
-            <ResizablePanel className={`h-full ${isSelectChat ? 'hidden' : 'block'} md:block`} defaultSize={270} maxSize={50} minSize={30}>
+            <ResizablePanel className={`h-full ${isSelectChat ? 'hidden' : 'block'} md:block min-w-[340px]`} defaultSize={270} maxSize={50} minSize={30}>
                 <Tabs defaultValue='all'>
                     <div className="flex items-center px-4 py-2">
                         <h1 className="text-xl font-bold">Inbox</h1>

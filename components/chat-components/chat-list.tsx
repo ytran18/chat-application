@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { ScrollArea } from "../ui/scroll-area";
-import { Inbox } from "@/lib/data";
+import { Inbox, gapTime } from "@/lib/data";
 import { useMail } from "@/lib/use-mail";
 
 interface ChatListProps {
@@ -34,10 +34,11 @@ export function ChatList({ items, handleSelectChat }: ChatListProps) {
                         onClick={() => handleClick(item)}
                     >
                         <div className="flex w-full flex-col gap-1">
-                            <div className="flex items-center">
-                                <div className="flex items-center gap-2">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-2 mr-2">
                                     <div className="font-semibold">{item.email}</div>
                                 </div>
+                                <div className="text-xs w-[84px] opacity-60 truncate">{gapTime(item.message?.[item.message.length - 1].created_at)}</div>
                             </div>
                         </div>
 
