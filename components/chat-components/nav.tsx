@@ -9,7 +9,7 @@ interface NavProps {
         title: string
         label?: string
         icon: LucideIcon
-        variant: "default" | "secondary",
+        variant: "default" | "ghost",
         tab: number,
     }[],
     handleChangeTab: (tab: number) => void,
