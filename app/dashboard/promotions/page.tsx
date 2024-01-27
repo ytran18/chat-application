@@ -15,6 +15,11 @@ export default function page() {
                         <h1 className="text-xl font-bold">Promotions</h1>
                     </div>
                     <Separator />
+                    <div className='w-full h-full p-3'>
+                        <div className='w-[300px] h-[160px] text-lg p-3 rounded-md shadow-md border border-[rgb(219,219,219)]'>
+                            Demo Card
+                        </div>
+                    </div>
             </ResizablePanel>
         </DefaultLayout>
     );
