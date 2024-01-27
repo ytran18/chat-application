@@ -85,7 +85,7 @@ export function ChatDisplay({ inbox, width, isShowProfile, handleSelectChat, han
                                                 </>
                                             )}
                                             <Avatar>
-                                                <AvatarFallback className="text-white" style={{backgroundColor: item.role === 'user' ? userAvatarColorBg : ''}}>
+                                                <AvatarFallback className={`${item.role === 'user' ? 'text-white' : ''}`} style={{backgroundColor: item.role === 'user' ? userAvatarColorBg : ''}}>
                                                     {item.role === 'user' ? inbox.email.split(" ").map((chunk) => chunk[0]).join("").toUpperCase() : 'A'}
                                                 </AvatarFallback>
                                             </Avatar>
