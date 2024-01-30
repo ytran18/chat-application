@@ -39,25 +39,25 @@ export function ChatList({ items, handleSelectChat, avtBgColor }: ChatListProps)
                             )}
                             onClick={() => handleClick(item)}
                         >
-
                             <Avatar className="w-12 h-12 ">
-                                <AvatarFallback style={{backgroundColor: `${bgColor}`}} className={`text-white text-lg`}>
-                                {item.email.charAt(0).toUpperCase()}
+                                <AvatarFallback className="text-white text-lg" style={{backgroundColor: `${bgColor}`}}>
+                                    {item.email.charAt(0).toUpperCase()}
                                 </AvatarFallback>
                             </Avatar>
                             <div className="flex flex-col w-full">
-                                <div className="flex w-full flex-1 items-center justify-between">
-                                    <div className="flex items-center gap-2 mr-2 w-full sm:w-auto">
-                                        <div className="font-semibold w-full sm:w-auto">{item.email}</div>
+                                <div className="flex w-full flex-col gap-1">
+                                    <div className="grid grid-cols-2 items-center">
+                                        <div className="flex w-[120px] items-center">
+                                            <div className="font-semibold truncate">{item.email}</div>
+                                        </div>
+                                        <div className="text-xs flex justify-end text-muted-foreground opacity-60">
+                                            {gapTime(item.message?.[item.message.length - 1].created_at)}
+                                        </div>
                                     </div>
-                                    <div className="text-xs hidden sm:flex w-[84px] opacity-60 truncate">{gapTime(item.message?.[item.message.length - 1].created_at)}</div>
                                 </div>
-
-                                <div className="line-clamp-2 w-[60%] sm:w-full mb-3 text-xs text-muted-foreground">
+                                <div className="line-clamp-2 text-xs text-muted-foreground">
                                     {item.user_last_message.substring(0, 300)}
                                 </div>
-
-                                <div className="text-xs flex sm:hidden w-[84px] opacity-60 truncate">{gapTime(item.message?.[item.message.length - 1].created_at)}</div>
                             </div>
                         </button>
                     )
