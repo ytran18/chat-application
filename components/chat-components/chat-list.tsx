@@ -46,8 +46,8 @@ export function ChatList({ items, handleSelectChat, avtBgColor }: ChatListProps)
                             </Avatar>
                             <div className="flex flex-col w-full">
                                 <div className="flex w-full flex-col gap-1">
-                                    <div className="grid grid-cols-2 items-center">
-                                        <div className="flex w-[120px] items-center">
+                                    <div className="flex justify-between items-center">
+                                        <div className="flex w-[120px] sm:w-auto items-center">
                                             <div className="font-semibold truncate">{item.email}</div>
                                         </div>
                                         <div className="text-xs flex justify-end text-muted-foreground opacity-60">
